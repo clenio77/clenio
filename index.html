@@ -256,9 +256,8 @@
                 <div class="flex justify-center space-x-6 text-3xl">
                     <!-- ATUALIZE SEUS LINKS AQUI -->
                     <a href="https://github.com/clenio77" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/clenio-oliveira" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://x.com/clenioafonso" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/afonso.clenio/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/seu-usuario" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </section>
@@ -267,7 +266,7 @@
         <section id="sobre" class="reveal">
             <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-cyan-400 font-fira">Sobre Mim</h2>
             <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
-                <img src="images/clenio.jpeg" alt="Foto de Clênio" class="w-48 h-48 rounded-full border-4 border-cyan-400 object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/1a202c/00f0c0?text=Sua+Foto';">
+                <img src="images/profile-photo.jpg" alt="Foto de Clênio" class="w-48 h-48 rounded-full border-4 border-cyan-400 object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/1a202c/00f0c0?text=Sua+Foto';">
                 <p class="text-lg leading-relaxed">
                     <!-- PERSONALIZE ESTE TEXTO -->
                     Olá! Sou Clênio, um apaixonado por tecnologia com experiência em criar soluções web robustas e inovadoras. Meu foco está em desenvolver aplicações eficientes e escaláveis, utilizando as mais recentes tecnologias do mercado, incluindo IA. Estou sempre em busca de novos desafios e aprendizados.
@@ -427,10 +426,10 @@
                 </div>
                 <!-- Post 2 -->
                 <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-cyan-400 transition-colors duration-300">
-                    <p class="text-sm text-gray-500 font-fira mb-1">15 de Maio, 2024</p>
-                    <h3 class="text-2xl font-bold text-white mb-2">Entendendo os WebSockets: Comunicação em Tempo Real</h3>
-                    <p class="text-gray-400 mb-4">Um guia prático para implementar WebSockets em suas aplicações e por que eles são essenciais para...</p>
-                    <a href="#" class="glitch-link font-bold">Ler mais <i class="fas fa-arrow-right"></i></a>
+                    <p class="text-sm text-gray-500 font-fira mb-1">07 de Junho, 2025</p>
+                    <h3 class="text-2xl font-bold text-white mb-2">Servidores MCP e o Futuro das Aplicações Web com IA</h3>
+                    <p class="text-gray-400 mb-4">Uma exploração sobre a arquitetura necessária para rodar aplicações de IA com alta performance...</p>
+                    <a href="blog-post-2.html" class="glitch-link font-bold">Ler mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -593,10 +592,8 @@
                 if(!targetElement) return;
 
                 btn.addEventListener('click', () => {
-                    // Seleciona o texto dentro do elemento
                     const textToCopy = targetElement.value || targetElement.textContent;
                     
-                    // Usa um textarea temporário para copiar
                     const tempTextArea = document.createElement('textarea');
                     tempTextArea.value = textToCopy;
                     document.body.appendChild(tempTextArea);
@@ -604,7 +601,6 @@
                     document.execCommand('copy');
                     document.body.removeChild(tempTextArea);
 
-                    // Feedback visual
                     const originalIcon = btn.innerHTML;
                     btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                     setTimeout(() => {
@@ -658,6 +654,7 @@
             const optimizerInput = document.getElementById('optimizer-input');
             const optimizerLoader = document.getElementById('optimizer-loader');
             const optimizerResult = document.getElementById('optimizer-result');
+            const optimizerCopyBtn = optimizerResult.nextElementSibling;
 
             optimizeBtn.addEventListener('click', async () => {
                 const code = optimizerInput.value;
@@ -668,6 +665,7 @@
                 }
                 optimizerLoader.classList.remove('hidden');
                 optimizerResult.classList.add('hidden');
+                optimizerCopyBtn.classList.add('hidden');
                 optimizeBtn.disabled = true;
 
                 const prompt = `Como um engenheiro de software sênior, analise o seguinte trecho de código. Forneça sugestões práticas para melhorar sua performance, legibilidade e conformidade com as melhores práticas. Formate sua resposta com títulos claros (ex: "Performance", "Legibilidade") e use exemplos de código quando aplicável. O código é:\n\n\`\`\`\n${code}\n\`\`\``;
@@ -677,8 +675,8 @@
                 optimizerResult.classList.remove('hidden');
                 optimizerLoader.classList.add('hidden');
                 optimizeBtn.disabled = false;
-                setupCopyButton(optimizerResult.nextElementSibling);
-                optimizerResult.nextElementSibling.classList.remove('hidden');
+                setupCopyButton(optimizerCopyBtn);
+                optimizerCopyBtn.classList.remove('hidden');
             });
 
             // --- Code Explainer ---
@@ -686,6 +684,7 @@
             const codeInput = document.getElementById('code-input');
             const explanationLoader = document.getElementById('explanation-loader');
             const explanationResult = document.getElementById('explanation-result');
+            const explainerCopyBtn = explanationResult.nextElementSibling;
 
             explainBtn.addEventListener('click', async () => {
                 const code = codeInput.value;
@@ -694,21 +693,20 @@
                     explanationResult.classList.remove('hidden');
                     return;
                 }
-
                 explanationLoader.classList.remove('hidden');
                 explanationResult.classList.add('hidden');
+                explainerCopyBtn.classList.add('hidden');
                 explainBtn.disabled = true;
 
                 const prompt = `Aja como um programador sênior e didático. Explique o seguinte trecho de código em português, de forma clara e concisa, como se estivesse ensinando um júnior. Separe a explicação em pontos ou parágrafos curtos. Código:\n\n\`\`\`\n${code}\n\`\`\``;
                 const responseText = await callGemini(prompt);
                 
                 explanationResult.textContent = responseText;
-                
                 explanationLoader.classList.add('hidden');
                 explanationResult.classList.remove('hidden');
                 explainBtn.disabled = false;
-                setupCopyButton(explanationResult.nextElementSibling);
-                explanationResult.nextElementSibling.classList.remove('hidden');
+                setupCopyButton(explainerCopyBtn);
+                explainerCopyBtn.classList.remove('hidden');
             });
 
             // --- Code Translator ---
@@ -718,6 +716,7 @@
             const sourceLangSelect = document.getElementById('source-lang');
             const targetLangSelect = document.getElementById('target-lang');
             const translationLoader = document.getElementById('translation-loader');
+            const translatorCopyBtn = translatedCodeOutput.nextElementSibling.nextElementSibling;
 
             translateBtn.addEventListener('click', async () => {
                 const sourceCode = sourceCodeInput.value;
@@ -732,9 +731,9 @@
                     translatedCodeOutput.value = 'A linguagem de origem e destino devem ser diferentes.';
                     return;
                 }
-
                 translationLoader.style.display = 'flex';
                 translatedCodeOutput.value = '';
+                translatorCopyBtn.classList.add('hidden');
                 translateBtn.disabled = true;
 
                 const prompt = `Aja como um especialista em programação. Traduza o seguinte trecho de código de ${sourceLang} para ${targetLang}. Forneça apenas o bloco de código traduzido, sem explicações adicionais, a menos que uma tradução direta seja impossível. Código a ser traduzido:\n\n\`\`\`${sourceLang}\n${sourceCode}\n\`\`\``;
@@ -745,11 +744,10 @@
                 const cleanedResponse = codeBlockMatch ? codeBlockMatch[1].trim() : responseText.trim();
                 
                 translatedCodeOutput.value = cleanedResponse;
-                
                 translationLoader.style.display = 'none';
                 translateBtn.disabled = false;
-                setupCopyButton(translatedCodeOutput.nextElementSibling.nextElementSibling);
-                translatedCodeOutput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+                setupCopyButton(translatorCopyBtn);
+                translatorCopyBtn.classList.remove('hidden');
             });
 
             // --- EFEITO MATRIX (restante do código...) ---

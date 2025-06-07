@@ -3,11 +3,9 @@
 
 services:
   # Define um serviço do tipo Static Site (Site Estático)
-  - type: static
+  - type: static_site # CORREÇÃO: O tipo correto é 'static_site'
     # Nome do seu serviço no painel do Render. Pode ser o que você quiser.
     name: portfolio-clenio
-    # Ambiente de execução. 'static' para sites HTML/CSS/JS.
-    env: static
     # O diretório que contém os arquivos a serem publicados.
     # Como seu index.html está na raiz, usamos '.'
     publishDir: .

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clênio | Desenvolvedor & Criador</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Fira Code & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Devicon for Tech Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+
+    <style>
+        /* Define as fontes personalizadas e transições suaves */
+        :root {
+            --bg-dark: #0a0a0a;
+            --text-dark: #e0e0e0;
+            --card-dark: #1f2937;
+            --border-dark: #374151;
+            --header-dark: rgba(10, 10, 10, 0.5);
+            
+            /* Paleta de cores do tema claro atualizada para maior contraste */
+            --bg-light: #e2e8f0; /* Cinza mais escuro (Slate 200) */
+            --text-light: #0f172a; /* Texto bem escuro (Slate 900) */
+            --card-light: #ffffff; /* Branco para os cartões */
+            --border-light: #cbd5e1; /* Borda definida (Slate 300) */
+            --header-light: rgba(226, 232, 240, 0.5); /* Header com transparência */
+
+            --accent: #00f0c0;
+            --accent-hover-dark: #00f0c0;
+            --accent-hover-light: #06b6d4; /* Ciano */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Tema Claro */
+        body.light {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+        body.light header {
+            background-color: var(--header-light);
+        }
+        body.light .bg-gray-800 {
+            background-color: var(--card-light);
+            border-color: var(--border-light);
+            box-shadow: none;
+        }
+        body.light .bg-gray-900, body.light .bg-black {
+             background-color: var(--bg-light);
+        }
+        body.light .border-gray-700, body.light .border-gray-800, body.light .border-gray-600 {
+            border-color: var(--border-light);
+        }
+        body.light .text-white { color: var(--text-light); }
+        body.light .text-gray-200 { color: #334155; }
+        body.light .text-gray-400 { color: #475569; }
+        body.light .glitch-link:hover {
+            color: var(--accent-hover-light);
+            text-shadow: none;
+        }
+        body.light #matrix-canvas { opacity: 0.05; }
+        body.light .skill-icon { color: #475569; }
+        body.light .skill-icon-container:hover .skill-icon { color: var(--accent-hover-light); }
+        body.light .skill-name { background-color: var(--accent-hover-light); color: #fff; }
+        body.light .bg-cyan-900 { background-color: #cffafe; }
+        body.light .text-cyan-300 { color: #0891b2; }
+        body.light .text-cyan-400 { color: var(--accent-hover-light); }
+        body.light #preloader { background-color: var(--bg-light); }
+        body.light .copy-btn { color: #475569; }
+        body.light .copy-btn:hover { color: var(--accent-hover-light); }
+        
+        /* Estilos para o preloader */
+        #preloader {
+            transition: opacity 0.5s ease-out;
+        }
+        .preloader-animation {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(0, 240, 192, 0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .font-fira { font-family: 'Fira Code', monospace; }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--accent);
+            animation: blink 0.7s infinite;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        #matrix-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; opacity: 0.3; transition: opacity 0.3s ease;
+        }
+        
+        .content-overlay { position: relative; z-index: 1; }
+        
+        .glitch-link { transition: color 0.3s ease; }
+        .glitch-link:hover {
+            color: var(--accent-hover-dark);
+            text-shadow: 0 0 5px var(--accent-hover-dark), 0 0 10px var(--accent-hover-dark);
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 30px; height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .project-image {
+            height: 180px; object-fit: cover;
+            border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;
+        }
+        
+        .skill-icon-container {
+            position: relative; display: flex;
+            justify-content: center; align-items: center;
+        }
+        .skill-icon {
+            font-size: 4rem; color: #9ca3af;
+            transition: all 0.3s ease;
+        }
+        .skill-icon-container:hover .skill-icon {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+        .skill-name {
+            position: absolute; bottom: -30px;
+            background-color: var(--accent);
+            color: #0a0a0a;
+            padding: 2px 8px; border-radius: 4px;
+            font-size: 0.8rem; font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+            pointer-events: none;
+        }
+        .skill-icon-container:hover .skill-name { opacity: 1; bottom: -35px; }
+
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px;
+            bottom: 40px; right: 40px;
+            background-color: #25D366; color: #FFF;
+            border-radius: 50px; text-align: center; font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100; display: flex; justify-content: center; align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .copy-btn:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 overflow-x-hidden">
+
+    <!-- ===== Preloader ===== -->
+    <div id="preloader" class="fixed inset-0 bg-gray-900 flex justify-center items-center z-[1000]">
+        <div class="preloader-animation"></div>
+    </div>
+
+    <!-- ===== Header ===== -->
+    <header class="bg-black bg-opacity-50 backdrop-blur-sm p-4 fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-fira glitch-link">&lt;Clênio /&gt;</a>
+            <div class="flex items-center gap-6">
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#sobre" class="hover:text-cyan-400 transition-colors">Sobre</a>
+                    <a href="#habilidades" class="hover:text-cyan-400 transition-colors">Habilidades</a>
+                    <a href="#ai-tools" class="hover:text-cyan-400 transition-colors">Ferramentas IA</a>
+                    <a href="#projetos" class="hover:text-cyan-400 transition-colors">Projetos</a>
+                    <a href="#blog" class="hover:text-cyan-400 transition-colors">Blog</a>
+                    <a href="#contato" class="hover:text-cyan-400 transition-colors">Contato</a>
+                </nav>
+                <button id="theme-toggle" class="text-xl hover:text-cyan-400 transition-colors">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4">
+            <a href="#sobre" class="block py-2 px-4 text-sm hover:bg-gray-800">Sobre</a>
+            <a href="#habilidades" class="block py-2 px-4 text-sm hover:bg-gray-800">Habilidades</a>
+            <a href="#ai-tools" class="block py-2 px-4 text-sm hover:bg-gray-800">Ferramentas IA</a>
+            <a href="#projetos" class="block py-2 px-4 text-sm hover:bg-gray-800">Projetos</a>
+            <a href="#blog" class="block py-2 px-4 text-sm hover:bg-gray-800">Blog</a>
+            <a href="#contato" class="block py-2 px-4 text-sm hover:bg-gray-800">Contato</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 md:py-24 space-y-24">
+        <!-- ===== Hero Section ===== -->
+        <section id="home" class="h-screen flex items-center justify-center relative overflow-hidden -mt-24">
+            <canvas id="matrix-canvas"></canvas>
+            <div class="content-overlay text-center p-4">
+                <h1 id="typewriter" class="text-4xl md:text-6xl font-bold text-white mb-4"></h1>
+                <p class="text-lg md:text-2xl text-cyan-400 font-fira mb-8">Desenvolvedor Python | 
+                    Desenvolvedor de IA | E Sistemas Inteligentes</p>
+                <div class="flex justify-center space-x-6 text-3xl">
+                    <!-- ATUALIZE SEUS LINKS AQUI -->
+                    <a href="https://github.com/clenio77" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/clenio-oliveira" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://x.com/clenioafonso" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/afonso.clenio/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-transform duration-300 hover:scale-110" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sobre Section ===== -->
+        <section id="sobre" class="reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-cyan-400 font-fira">Sobre Mim</h2>
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+                <img src="images/clenio.jpeg" alt="Foto de Clênio" class="w-48 h-48 rounded-full border-4 border-cyan-400 object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/1a202c/00f0c0?text=Sua+Foto';">
+                <p class="text-lg leading-relaxed">
+                    <!-- PERSONALIZE ESTE TEXTO -->
+                    Olá! Sou Clênio, um apaixonado por tecnologia com experiência em criar soluções web robustas e inovadoras. Meu foco está em desenvolver aplicações eficientes e escaláveis, utilizando as mais recentes tecnologias do mercado, incluindo IA. Estou sempre em busca de novos desafios e aprendizados.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== Habilidades Section ===== -->
+        <section id="habilidades" class="reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-cyan-400 font-fira">Habilidades Técnicas</h2>
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-16 gap-x-8 max-w-4xl mx-auto">
+                <div class="skill-icon-container"><i class="devicon-python-plain skill-icon"></i><span class="skill-name">Python</span></div>
+                <div class="skill-icon-container"><i class="devicon-react-original skill-icon"></i><span class="skill-name">React</span></div>
+                <div class="skill-icon-container"><i class="devicon-pandas-original skill-icon"></i><span class="skill-name">Pandas</span></div>
+                <div class="skill-icon-container"><i class="devicon-git-plain skill-icon"></i><span class="skill-name">Git</span></div>
+                <div class="skill-icon-container"><i class="devicon-docker-plain skill-icon"></i><span class="skill-name">Docker</span></div>
+                <div class="skill-icon-container"><i class="devicon-postgresql-plain skill-icon"></i><span class="skill-name">PostgreSQL</span></div>
+                <div class="skill-icon-container"><i class="devicon-javascript-plain skill-icon"></i><span class="skill-name">JavaScript</span></div>
+                <div class="skill-icon-container"><i class="fas fa-robot skill-icon"></i><span class="skill-name">CrewAI</span></div>
+            </div>
+        </section>
+
+        <!-- ===== Ferramentas de IA Section ===== -->
+        <section id="ai-tools" class="reveal space-y-24">
+            <!-- ===== Code Optimizer Section ===== -->
+            <div id="code-optimizer">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-cyan-400 font-fira">Otimizador de Código com IA</h2>
+                <p class="text-center max-w-2xl mx-auto mb-8 text-gray-400">
+                    Cole seu código e a IA sugerirá melhorias de performance, legibilidade e boas práticas.
+                </p>
+                <div class="max-w-4xl mx-auto p-6 bg-gray-800 rounded-lg border border-gray-700">
+                    <textarea id="optimizer-input" class="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg focus:outline-none focus:border-cyan-400 font-fira h-48" placeholder="def my_func(items):&#10;  new_list = []&#10;  for i in items:&#10;    if i % 2 == 0:&#10;      new_list.append(i * 2)&#10;  return new_list"></textarea>
+                    <button id="optimize-code-btn" class="w-full mt-4 p-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">Otimizar Código</button>
+                    <div id="optimizer-loader" class="loader hidden mt-4"></div>
+                    <div class="relative">
+                        <div id="optimizer-result" class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600 min-h-[50px] whitespace-pre-wrap font-fira hidden"></div>
+                        <button class="copy-btn hidden" data-target="optimizer-result"><i class="fas fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Code Explainer Section ===== -->
+            <div id="code-explainer">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-cyan-400 font-fira">Explicador de Código</h2>
+                <p class="text-center max-w-2xl mx-auto mb-8 text-gray-400">
+                    Não entendeu um trecho de código? A IA explica para você, linha por linha.
+                </p>
+                <div class="max-w-4xl mx-auto p-6 bg-gray-800 rounded-lg border border-gray-700">
+                    <textarea id="code-input" class="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg focus:outline-none focus:border-cyan-400 font-fira h-48" placeholder="def hello(name):&#10;    print(f'Hello, {name}')"></textarea>
+                    <button id="explain-code-btn" class="w-full mt-4 p-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">Analisar Código</button>
+                    <div id="explanation-loader" class="loader hidden mt-4"></div>
+                    <div class="relative">
+                        <div id="explanation-result" class="mt-6 p-4 bg-gray-900 rounded-lg border border-gray-600 min-h-[50px] whitespace-pre-wrap font-fira hidden"></div>
+                        <button class="copy-btn hidden" data-target="explanation-result"><i class="fas fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== Code Translator Section ===== -->
+            <div id="code-translator">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-cyan-400 font-fira">Tradutor de Código</h2>
+                <p class="text-center max-w-2xl mx-auto mb-8 text-gray-400">
+                    Traduza trechos de código entre diferentes linguagens de programação.
+                </p>
+                <div class="max-w-6xl mx-auto p-6 bg-gray-800 rounded-lg border border-gray-700">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Coluna de Entrada -->
+                        <div>
+                            <label for="source-lang" class="block mb-2 text-sm font-medium">De:</label>
+                            <select id="source-lang" class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg focus:outline-none focus:border-cyan-400 font-fira">
+                                <option>Python</option>
+                                <option>JavaScript</option>
+                                <option>Java</option>
+                                <option>C++</option>
+                                <option>Go</option>
+                            </select>
+                            <textarea id="source-code-input" class="w-full mt-4 p-3 bg-gray-900 border border-gray-600 rounded-lg focus:outline-none focus:border-cyan-400 font-fira h-64" placeholder="Cole o código para traduzir..."></textarea>
+                        </div>
+                        <!-- Coluna de Saída -->
+                        <div>
+                            <label for="target-lang" class="block mb-2 text-sm font-medium">Para:</label>
+                            <select id="target-lang" class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg focus:outline-none focus:border-cyan-400 font-fira">
+                                <option>JavaScript</option>
+                                <option selected>Python</option>
+                                <option>Java</option>
+                                <option>C++</option>
+                                <option>Go</option>
+                            </select>
+                            <div class="relative mt-4">
+                                <textarea id="translated-code-output" readonly class="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg font-fira h-64" placeholder="Tradução aparecerá aqui..."></textarea>
+                                <div id="translation-loader" class="loader hidden absolute inset-0 bg-gray-900 bg-opacity-50 justify-center items-center" style="display: none;"></div>
+                                <button class="copy-btn hidden" data-target="translated-code-output"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="translate-code-btn" class="w-full mt-6 p-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">Traduzir Código</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Projetos Section ===== -->
+        <section id="projetos" class="reveal">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-cyan-400 font-fira">Projetos em Destaque</h2>
+                <button id="generate-project-idea" class="mt-4 px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">✨ Sugerir Novo Projeto com IA</button>
+            </div>
+             <div id="project-idea-loader" class="loader hidden"></div>
+             <div id="project-idea-result" class="bg-gray-800 border border-cyan-500 p-6 rounded-lg my-6 hidden"></div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Projeto 1 -->
+                <div class="project-card bg-gray-800 rounded-lg border border-gray-700 transition-all duration-300 overflow-hidden">
+                    <img src="images/project-licitacao-ai.png" alt="Preview do projeto Licitação-ai" class="w-full project-image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a202c/00f0c0?text=Licita%C3%A7%C3%A3o-AI';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">Licitação-ai</h3>
+                        <p class="text-gray-400 mb-4">Sistema de análise de licitações, abordando a análise jurídica, técnica, de risco e cambial.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">CrewAI</span>
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">OpenAI</span>
+                        </div>
+                        <a href="https://github.com/clenio77/licitacao-ai" target="_blank" rel="noopener noreferrer" class="glitch-link font-bold">Ver no GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Projeto 2 -->
+                <div class="project-card bg-gray-800 rounded-lg border border-gray-700 transition-all duration-300 overflow-hidden">
+                     <img src="images/project-house-price.png" alt="Preview do projeto House-Price" class="w-full project-image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a202c/00f0c0?text=House+Price+AI';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">House-Price</h3>
+                        <p class="text-gray-400 mb-4">Sistema de predição de preço de aluguéis de imóveis, conforme a rua, o bairro e cidade.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                            <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">Pandas</span>
+                             <span class="bg-cyan-900 text-cyan-300 text-xs font-medium px-2.5 py-0.5 rounded">Streamlit</span>
+                        </div>
+                        <a href="https://github.com/clenio77/kc_house" target="_blank" rel="noopener noreferrer" class="glitch-link font-bold">Ver no GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Blog Section ===== -->
+        <section id="blog" class="reveal">
+            <div class="text-center mb-12">
+                 <h2 class="text-3xl md:text-4xl font-bold text-cyan-400 font-fira">Últimas Postagens</h2>
+                 <button id="generate-blog-idea" class="mt-4 px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">✨ Gerar Ideia de Post com IA</button>
+            </div>
+            <div id="blog-idea-loader" class="loader hidden"></div>
+            <div id="blog-idea-result" class="bg-gray-800 border border-cyan-500 p-6 rounded-lg my-6 hidden"></div>
+            <div class="space-y-8 max-w-4xl mx-auto">
+                <!-- Post 1 -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-cyan-400 transition-colors duration-300">
+                    <p class="text-sm text-gray-500 font-fira mb-1">07 de Junho, 2025</p>
+                    <h3 class="text-2xl font-bold text-white mb-2">O Futuro do Desenvolvimento com IA Generativa</h3>
+                    <p class="text-gray-400 mb-4">Uma análise sobre como as ferramentas de IA estão transformando o ciclo de desenvolvimento de software...</p>
+                    <a href="blog-post-1.html" class="glitch-link font-bold">Ler mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Post 2 -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-cyan-400 transition-colors duration-300">
+                    <p class="text-sm text-gray-500 font-fira mb-1">15 de Maio, 2024</p>
+                    <h3 class="text-2xl font-bold text-white mb-2">Entendendo os WebSockets: Comunicação em Tempo Real</h3>
+                    <p class="text-gray-400 mb-4">Um guia prático para implementar WebSockets em suas aplicações e por que eles são essenciais para...</p>
+                    <a href="#" class="glitch-link font-bold">Ler mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Contato Section ===== -->
+        <section id="contato" class="reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-cyan-400 font-fira">Entre em Contato</h2>
+            <p class="text-center max-w-2xl mx-auto mb-8">
+                <!-- ATUALIZE SEU EMAIL AQUI -->
+                Tem uma ideia ou um projeto em mente? Vamos conversar! Envie um e-mail para <a href="mailto:seu.email.profissional@example.com" class="text-cyan-400 underline glitch-link">seu.email.profissional@example.com</a> ou use o formulário abaixo.
+            </p>
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="max-w-xl mx-auto space-y-4">
+                <!-- Chave de Acesso Web3Forms (será preenchida via JS) -->
+                <input type="hidden" name="access_key" id="web3forms-access-key">
+                
+                <input type="text" name="name" placeholder="Seu Nome" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-400" required>
+                <input type="email" name="email" placeholder="Seu E-mail" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-400" required>
+                <textarea name="message" placeholder="Sua Mensagem" rows="5" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-400" required></textarea>
+                <button type="submit" class="w-full p-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-500 transition-colors">Enviar Mensagem</button>
+                <p id="form-status" class="text-center text-sm h-4"></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="text-center p-6 bg-gray-900 border-t border-gray-800">
+        <p class="font-fira">&copy; 2025 Clênio. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- ===== WhatsApp Floating Button ===== -->
+    <a id="whatsapp-link" href="" target="_blank" rel="noopener noreferrer" class="whatsapp-float" title="Converse comigo no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Script de Configuração -->
+    <script src="config.js"></script>
+
+    <!-- Script Principal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- PRELOADER ---
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500); // Corresponde à duração da transição
+            });
+
+            // --- APLICAR CONFIGURAÇÕES ---
+            const web3formsKeyInput = document.getElementById('web3forms-access-key');
+            if (web3formsKeyInput && typeof WEB3FORMS_ACCESS_KEY !== 'undefined') {
+                web3formsKeyInput.value = WEB3FORMS_ACCESS_KEY;
+            }
+            const whatsappLink = document.getElementById('whatsapp-link');
+            if (whatsappLink && typeof WHATSAPP_NUMBER !== 'undefined') {
+                whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+            }
+
+            // --- THEME SWITCHER ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            const applyTheme = (theme) => {
+                if (theme === 'light') {
+                    body.classList.add('light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.classList.remove('light');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                }
+            };
+
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = body.classList.contains('light') ? 'light' : 'dark';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme(newTheme);
+            });
+            
+            // --- FORMULÁRIO DE CONTATO (WEB3FORMS) ---
+            const form = document.getElementById('contact-form');
+            const status = document.getElementById('form-status');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                status.textContent = 'Enviando...';
+                status.style.color = 'inherit';
+                const formData = new FormData(form);
+                
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        status.textContent = "Obrigado por sua mensagem!";
+                        status.style.color = 'rgb(0, 240, 192)';
+                        form.reset();
+                    } else {
+                        status.textContent = data.message || "Oops! Houve um problema.";
+                        status.style.color = 'rgb(239, 68, 68)';
+                    }
+                })
+                .catch(error => {
+                    status.textContent = "Oops! Houve um problema ao enviar.";
+                    status.style.color = 'rgb(239, 68, 68)';
+                });
+            });
+
+            // --- GEMINI API INTEGRATION ---
+            const callGemini = async (prompt) => {
+                const apiKey = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        return result.candidates[0].content.parts[0].text;
+                    } else {
+                        console.error("Resposta da API em formato inesperado:", result);
+                        return "Não foi possível obter uma sugestão. Tente novamente.";
+                    }
+                } catch (error) {
+                    console.error("Erro ao chamar a API Gemini:", error);
+                    return "Ocorreu um erro ao conectar com a IA. Verifique o console para mais detalhes.";
+                }
+            };
+
+            // --- FUNÇÃO DE COPIAR TEXTO ---
+            function setupCopyButton(btn) {
+                const targetId = btn.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                if(!targetElement) return;
+
+                btn.addEventListener('click', () => {
+                    // Seleciona o texto dentro do elemento
+                    const textToCopy = targetElement.value || targetElement.textContent;
+                    
+                    // Usa um textarea temporário para copiar
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = textToCopy;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextArea);
+
+                    // Feedback visual
+                    const originalIcon = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                    setTimeout(() => {
+                        btn.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            }
+            
+            // Gerador de Ideias para Blog
+            const blogButton = document.getElementById('generate-blog-idea');
+            const blogLoader = document.getElementById('blog-idea-loader');
+            const blogResult = document.getElementById('blog-idea-result');
+
+            blogButton.addEventListener('click', async () => {
+                blogLoader.classList.remove('hidden');
+                blogResult.classList.add('hidden');
+                blogButton.disabled = true;
+
+                const prompt = "Aja como um especialista em conteúdo de tecnologia. Sugira 3 ideias de títulos para um post de blog voltado para desenvolvedores. Os tópicos devem ser atuais e interessantes. Para cada título, escreva uma sinopse de uma frase.";
+                const responseText = await callGemini(prompt);
+                
+                blogResult.innerHTML = responseText.replace(/\n/g, '<br>');
+
+                blogLoader.classList.add('hidden');
+                blogResult.classList.remove('hidden');
+                blogButton.disabled = false;
+            });
+            
+            // Gerador de Ideias de Projeto
+            const projectButton = document.getElementById('generate-project-idea');
+            const projectLoader = document.getElementById('project-idea-loader');
+            const projectResult = document.getElementById('project-idea-result');
+
+            projectButton.addEventListener('click', async () => {
+                projectLoader.classList.remove('hidden');
+                projectResult.classList.add('hidden');
+                projectButton.disabled = true;
+
+                const prompt = "Aja como um gerente de produto de tecnologia sênior. Sugira uma ideia de projeto web para um portfólio de desenvolvedor. Descreva o conceito do projeto, o problema que ele resolve e sugira uma stack de tecnologia (frontend, backend, banco de dados) para construí-lo.";
+                const responseText = await callGemini(prompt);
+                
+                projectResult.innerHTML = responseText.replace(/\n/g, '<br>');
+
+                projectLoader.classList.add('hidden');
+                projectResult.classList.remove('hidden');
+                projectButton.disabled = false;
+            });
+
+            // --- Code Optimizer ---
+            const optimizeBtn = document.getElementById('optimize-code-btn');
+            const optimizerInput = document.getElementById('optimizer-input');
+            const optimizerLoader = document.getElementById('optimizer-loader');
+            const optimizerResult = document.getElementById('optimizer-result');
+
+            optimizeBtn.addEventListener('click', async () => {
+                const code = optimizerInput.value;
+                if (!code.trim()) {
+                    optimizerResult.textContent = 'Por favor, insira um trecho de código para otimizar.';
+                    optimizerResult.classList.remove('hidden');
+                    return;
+                }
+                optimizerLoader.classList.remove('hidden');
+                optimizerResult.classList.add('hidden');
+                optimizeBtn.disabled = true;
+
+                const prompt = `Como um engenheiro de software sênior, analise o seguinte trecho de código. Forneça sugestões práticas para melhorar sua performance, legibilidade e conformidade com as melhores práticas. Formate sua resposta com títulos claros (ex: "Performance", "Legibilidade") e use exemplos de código quando aplicável. O código é:\n\n\`\`\`\n${code}\n\`\`\``;
+                const responseText = await callGemini(prompt);
+                
+                optimizerResult.textContent = responseText;
+                optimizerResult.classList.remove('hidden');
+                optimizerLoader.classList.add('hidden');
+                optimizeBtn.disabled = false;
+                setupCopyButton(optimizerResult.nextElementSibling);
+                optimizerResult.nextElementSibling.classList.remove('hidden');
+            });
+
+            // --- Code Explainer ---
+            const explainBtn = document.getElementById('explain-code-btn');
+            const codeInput = document.getElementById('code-input');
+            const explanationLoader = document.getElementById('explanation-loader');
+            const explanationResult = document.getElementById('explanation-result');
+
+            explainBtn.addEventListener('click', async () => {
+                const code = codeInput.value;
+                if (!code.trim()) {
+                    explanationResult.textContent = 'Por favor, insira um trecho de código para analisar.';
+                    explanationResult.classList.remove('hidden');
+                    return;
+                }
+
+                explanationLoader.classList.remove('hidden');
+                explanationResult.classList.add('hidden');
+                explainBtn.disabled = true;
+
+                const prompt = `Aja como um programador sênior e didático. Explique o seguinte trecho de código em português, de forma clara e concisa, como se estivesse ensinando um júnior. Separe a explicação em pontos ou parágrafos curtos. Código:\n\n\`\`\`\n${code}\n\`\`\``;
+                const responseText = await callGemini(prompt);
+                
+                explanationResult.textContent = responseText;
+                
+                explanationLoader.classList.add('hidden');
+                explanationResult.classList.remove('hidden');
+                explainBtn.disabled = false;
+                setupCopyButton(explanationResult.nextElementSibling);
+                explanationResult.nextElementSibling.classList.remove('hidden');
+            });
+
+            // --- Code Translator ---
+            const translateBtn = document.getElementById('translate-code-btn');
+            const sourceCodeInput = document.getElementById('source-code-input');
+            const translatedCodeOutput = document.getElementById('translated-code-output');
+            const sourceLangSelect = document.getElementById('source-lang');
+            const targetLangSelect = document.getElementById('target-lang');
+            const translationLoader = document.getElementById('translation-loader');
+
+            translateBtn.addEventListener('click', async () => {
+                const sourceCode = sourceCodeInput.value;
+                const sourceLang = sourceLangSelect.value;
+                const targetLang = targetLangSelect.value;
+
+                if (!sourceCode.trim()) {
+                    translatedCodeOutput.value = 'Por favor, insira o código a ser traduzido.';
+                    return;
+                }
+                if (sourceLang === targetLang) {
+                    translatedCodeOutput.value = 'A linguagem de origem e destino devem ser diferentes.';
+                    return;
+                }
+
+                translationLoader.style.display = 'flex';
+                translatedCodeOutput.value = '';
+                translateBtn.disabled = true;
+
+                const prompt = `Aja como um especialista em programação. Traduza o seguinte trecho de código de ${sourceLang} para ${targetLang}. Forneça apenas o bloco de código traduzido, sem explicações adicionais, a menos que uma tradução direta seja impossível. Código a ser traduzido:\n\n\`\`\`${sourceLang}\n${sourceCode}\n\`\`\``;
+                
+                const responseText = await callGemini(prompt);
+
+                const codeBlockMatch = responseText.match(/```(?:\w+)?\n([\s\S]+)```/);
+                const cleanedResponse = codeBlockMatch ? codeBlockMatch[1].trim() : responseText.trim();
+                
+                translatedCodeOutput.value = cleanedResponse;
+                
+                translationLoader.style.display = 'none';
+                translateBtn.disabled = false;
+                setupCopyButton(translatedCodeOutput.nextElementSibling.nextElementSibling);
+                translatedCodeOutput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+            });
+
+            // --- EFEITO MATRIX (restante do código...) ---
+            const canvas = document.getElementById('matrix-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const rainDrops = [];
+            for (let x = 0; x < columns; x++) rainDrops[x] = 1;
+            
+            const drawMatrix = () => {
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#00f0c0';
+                ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        rainDrops[i] = 0;
+                    }
+                    rainDrops[i]++;
+                }
+            };
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const newColumns = canvas.width / fontSize;
+                while(rainDrops.length > newColumns) rainDrops.pop();
+                while(rainDrops.length < newColumns) rainDrops.push(1);
+            });
+            setInterval(drawMatrix, 33);
+
+            // --- EFEITO TYPEWRITER ---
+            const typewriterElement = document.getElementById('typewriter');
+            const textToType = "Olá, eu sou Clênio";
+            let index = 0;
+            function type() {
+                if (index < textToType.length) {
+                    typewriterElement.innerHTML = textToType.substring(0, index + 1) + '<span class="typewriter-cursor"></span>';
+                    index++;
+                    setTimeout(type, 100);
+                } else {
+                    typewriterElement.innerHTML = textToType + '<span class="typewriter-cursor"></span>';
+                }
+            }
+            type();
+
+            // --- REVEAL ON SCROLL ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => observer.observe(el));
+
+            // --- EFEITO 3D NOS CARDS DE PROJETO ---
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -5;
+                    const rotateY = ((x - centerX) / centerX) * 5;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    card.style.boxShadow = '0 15px 30px rgba(0, 240, 192, 0.2)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                    card.style.boxShadow = 'none';
+                });
+            });
+            
+            // --- MENU MOBILE ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') mobileMenu.classList.add('hidden');
+            });
+
+        });
+    </script>
+
+</body>
+</html>

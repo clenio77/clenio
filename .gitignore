@@ -1,0 +1,5 @@
+# Ignorar o arquivo de configuração com informações sensíveis
+config.js
+
+# Ignorar dependências do Node.js, caso venha a usar
+node_modules/

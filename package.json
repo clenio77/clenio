@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-clenio",
+  "version": "1.0.0",
+  "description": "Script para gerar o arquivo de configuração durante o build.",
+  "main": "index.html",
+  "scripts": {
+    "build": "node ./create-config.js"
+  },
+  "author": "Clênio",
+  "license": "MIT"
+}

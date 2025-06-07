@@ -6,8 +6,5 @@
       "use": "@vercel/static-build",
       "config": { "distDir": "." }
     }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
   ]
 }

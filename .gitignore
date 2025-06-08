@@ -1,5 +1,42 @@
-# Ignorar o arquivo de configuração com informações sensíveis
+# Arquivos de configuração com informações sensíveis
 config.js
 
-# Ignorar dependências do Node.js, caso venha a usar
+# Dependências Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs
+*.log
+
+# Arquivos temporários
+.tmp/
+.temp/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ambiente virtual Python
+venv/
+env/
+.env
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Build outputs
+dist/
+build/
+
+# Vercel
+.vercel

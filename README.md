@@ -1,8 +1,16 @@
-Portfólio Pessoal com Ferramentas de IA
-📖 Sobre o Projeto
+# 🚀 Portfólio Pessoal com Ferramentas de IA
+
+## 📖 Sobre o Projeto
 Este é um portfólio pessoal moderno e interativo, desenvolvido para ser uma vitrine de habilidades e projetos na área de tecnologia e Inteligência Artificial. Com um design inspirado em terminais hacker, o site possui um conjunto de efeitos visuais e ferramentas de IA funcionais para engajar os visitantes.
 
 O projeto foi construído com HTML, CSS e JavaScript puros, utilizando o Google Gemini API para alimentar suas funcionalidades de IA.
+
+### 🎯 **Características Principais**
+- ✅ **PWA (Progressive Web App)** - Instalável e funciona offline
+- ✅ **SEO Otimizado** - Meta tags, structured data e sitemap
+- ✅ **Performance Otimizada** - Lazy loading, cache de API e otimizações
+- ✅ **Segurança** - Chaves API protegidas e configuração segura
+- ✅ **Acessibilidade** - ARIA labels e navegação otimizada
 
 ✨ Características
 O portfólio está repleto de recursos visuais e funcionais para criar uma experiência de usuário única e demonstrar proficiência técnica.
@@ -40,8 +48,26 @@ Botão de WhatsApp: Ícone flutuante para contato direto e rápido.
 
 Estrutura de Blog: Seção de blog com link para uma página de postagem individual.
 
-🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 O projeto foi construído utilizando tecnologias modernas e amplamente utilizadas no mercado.
+
+### Frontend
+- **HTML5** - Estrutura semântica e acessível
+- **CSS3** - Animações e efeitos visuais avançados
+- **JavaScript (ES6+)** - Funcionalidades interativas e PWA
+- **Tailwind CSS** - Framework CSS utilitário
+
+### APIs e Integrações
+- **Google Gemini AI** - Ferramentas de IA generativa
+- **Web3Forms** - Formulário de contato funcional
+- **Font Awesome** - Ícones profissionais
+- **Devicon** - Ícones de tecnologias
+
+### Deploy e Performance
+- **Vercel** - Hospedagem e deploy automático
+- **Service Worker** - Cache e funcionalidade offline
+- **Lazy Loading** - Carregamento otimizado de imagens
+- **API Caching** - Cache inteligente de requisições
 
 🚀 Como Executar o Projeto Localmente
 Para executar este projeto em sua máquina local, siga os passos abaixo.

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clenio.vercel.app/sitemap.xml
+
+# Disallow sensitive files
+Disallow: /config.js
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.vercel/

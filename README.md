@@ -116,7 +116,7 @@ Feito com ❤️ por Clênio.
 
 MIT License
 
-Copyright (c) 2025 Clênio
+Copyright (c) 2026 Clênio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

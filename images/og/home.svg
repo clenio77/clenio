@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00f0c0" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="80" y="90" width="1040" height="450" rx="32" fill="#0b1120" stroke="#1f2937" />
+  <rect x="120" y="130" width="280" height="10" rx="5" fill="url(#accent)" />
+  <text x="120" y="240" fill="#ffffff" font-family="Inter, Arial" font-size="54" font-weight="800">Clênio Moura</text>
+  <text x="120" y="310" fill="#94a3b8" font-family="Inter, Arial" font-size="28">Founder Profile e IA Jurídica</text>
+  <text x="120" y="380" fill="#00f0c0" font-family="Fira Code, monospace" font-size="22">Direito • IA • Sistemas</text>
+  <text x="120" y="470" fill="#64748b" font-family="Inter, Arial" font-size="18">clenio-moura.vercel.app</text>
+  <circle cx="1000" cy="220" r="120" fill="#00f0c0" opacity="0.08" />
+  <circle cx="1020" cy="260" r="90" fill="#3b82f6" opacity="0.08" />
+</svg>

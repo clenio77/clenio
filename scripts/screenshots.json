@@ -1,0 +1,26 @@
+[
+  {
+    "name": "genesys",
+    "url": "https://genesys.ia.br/"
+  },
+  {
+    "name": "rota-facil",
+    "url": "https://rotafacil-moura.vercel.app/"
+  },
+  {
+    "name": "busca-dinamica",
+    "url": "https://buscacep-dinamica.vercel.app/"
+  },
+  {
+    "name": "fenix-pdf",
+    "url": "https://fenix-pdf.vercel.app/"
+  },
+  {
+    "name": "capelania",
+    "url": "https://capelania-jesusbompastor.vercel.app/"
+  },
+  {
+    "name": "diario-maria-alice",
+    "url": "https://diario-maria-alice.vercel.app/"
+  }
+]

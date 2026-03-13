@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automação de Análise Documental em Escala | Clênio Moura</title>
+  <meta name="description" content="Notas sobre filas, priorização e métricas para análise documental em escala com IA." />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link rel="canonical" href="https://clenio-moura.vercel.app/blog-post-3.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://clenio-moura.vercel.app/blog-post-3.html" />
+  <meta property="og:title" content="Automação de Análise Documental em Escala | Clênio Moura" />
+  <meta property="og:description" content="Notas sobre filas, priorização e métricas para análise documental em escala com IA." />
+  <meta property="og:image" content="https://clenio-moura.vercel.app/images/og/blog-post-3.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://clenio-moura.vercel.app/blog-post-3.html" />
+  <meta property="twitter:title" content="Automação de Análise Documental em Escala | Clênio Moura" />
+  <meta property="twitter:description" content="Notas sobre filas, priorização e métricas para análise documental em escala com IA." />
+  <meta property="twitter:image" content="https://clenio-moura.vercel.app/images/og/blog-post-3.png" />
+    <meta property="twitter:site" content="@clenioafonso">
+    <meta property="twitter:creator" content="@clenioafonso">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --bg-dark: #0a0a0a; --text-dark: #e0e0e0; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-dark); }
+    .font-fira { font-family: 'Fira Code', monospace; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Automação de Análise Documental em Escala",
+    "description": "Notas sobre filas, priorização e métricas para análise documental em escala com IA.",
+    "datePublished": "2026-03-13",
+    "author": {
+      "@type": "Person",
+      "name": "Clênio Moura"
+    },
+    "url": "https://clenio-moura.vercel.app/blog-post-3.html"
+  }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200">
+  <main class="container mx-auto px-6 py-16 max-w-4xl">
+    <a href="index.html#notas" class="text-cyan-400 hover:text-cyan-300 font-fira">&larr; Voltar para notas</a>
+
+    <header class="mt-8">
+      <p class="text-xs text-gray-500 font-fira mb-2">13 de Março, 2026</p>
+      <p class="text-xs text-cyan-400 font-fira mb-2">Automação • Workflow • Produtividade</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white mb-4">Automação de Análise Documental em Escala</h1>
+      <p class="text-gray-400">Como projetar filas, priorização e métricas para manter precisão sem sacrificar throughput.</p>
+    </header>
+
+    <article class="mt-10 space-y-8 text-gray-300 leading-relaxed">
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-3">1. O gargalo real não é o modelo</h2>
+        <p>Em pipelines jurídicos, o problema costuma ser o fluxo: ingestão, fila, deduplicação, normalização e controle de prioridade. Sem isso, o modelo vira apenas um “gargalo inteligente”.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-3">2. Filas com classes de prioridade</h2>
+        <p>Separar documentos por impacto (alto risco, urgência, volume) permite tratar exceções primeiro. Isso reduz backlog e melhora previsibilidade.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-3">3. Métricas que importam</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Latency p95/p99:</strong> tempo real para decisões críticas.</li>
+          <li><strong>Throughput:</strong> documentos analisados por hora/dia.</li>
+          <li><strong>Rework rate:</strong> quantas análises precisam de revisão humana.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-white mb-3">4. Boas práticas rápidas</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Pipeline assíncrono com checkpoints.</li>
+          <li>Retry com backoff para falhas transitórias.</li>
+          <li>Roteamento por complexidade e custo.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

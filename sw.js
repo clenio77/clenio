@@ -19,24 +19,45 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Cache aberto');
-        return cache.addAll(urlsToCache);
+        return Promise.allSettled(
+          urlsToCache.map(function(url) {
+            return cache.add(url);
+          })
+        );
       })
   );
 });
 
 // Interceptar requisições
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
+  if (event.request.method !== 'GET') return;
+
+  const url = new URL(event.request.url);
+  if (url.pathname.startsWith('/api/')) return;
+
+  event.respondWith((async function() {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(event.request);
+
+    const fetchPromise = fetch(event.request)
       .then(function(response) {
-        // Cache hit - retorna a resposta
-        if (response) {
-          return response;
+        if (response && response.status === 200) {
+          cache.put(event.request, response.clone());
         }
-        return fetch(event.request);
-      }
-    )
-  );
+        return response;
+      })
+      .catch(function() {
+        return null;
+      });
+
+    if (cached) {
+      event.waitUntil(fetchPromise);
+      return cached;
+    }
+
+    const networkResponse = await fetchPromise;
+    return networkResponse || cached || new Response('', { status: 504, statusText: 'Gateway Timeout' });
+  })());
 });
 
 // Atualizar o service worker

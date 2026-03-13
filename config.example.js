@@ -13,6 +13,5 @@ const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_KEY_HERE";
 // Exemplo: 5511999999999
 const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER_HERE";
 
-// Sua chave de API do Gemini
-// Obtenha em: https://makersuite.google.com/app/apikey
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+// A chave da API do Gemini deve ser configurada no servidor (env var)
+// Exemplo: GEMINI_API_KEY na Vercel/Render/Netlify

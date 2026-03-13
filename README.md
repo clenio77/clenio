@@ -85,7 +85,9 @@ Abra o arquivo config.js e preencha com suas informações:
 
 const WEB3FORMS_ACCESS_KEY = "SUA_CHAVE_DE_ACESSO_AQUI"; // Obtida em web3forms.com
 const WHATSAPP_NUMBER = "5511999999999"; // Seu número no formato internacional
-const GEMINI_API_KEY = ""; // Sua chave do Google AI Studio (opcional)
+
+Para a Gemini API, configure a variável de ambiente no servidor:
+GEMINI_API_KEY="SUA_CHAVE_DO_GOOGLE_AI_STUDIO"
 
 Abra o Projeto
 Como este é um site estático, não há necessidade de um processo de build. Basta abrir o arquivo index.html diretamente no seu navegador.
